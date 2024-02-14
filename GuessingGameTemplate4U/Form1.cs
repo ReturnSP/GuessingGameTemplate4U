@@ -30,5 +30,22 @@ namespace GuessingGameTemplate4U
             MainScreen ms = new MainScreen();
             this.Controls.Add(ms);
         }
+        public static void ChangeScreen(object sender, UserControl nextScreen)
+        {
+            Form f;
+            if (sender is Form)
+            {
+                f = (Form)sender;
+            }
+            else
+            {
+                UserControl current = (UserControl)sender;
+                f = current.FindForm();
+                f.Controls.Remove(current);
+            }
+
+            nextScreen.Location = new Point((f.Width - nextScreen.Width) / 2, (f.Height - nextScreen.Height) / 2);
+            f.Controls.Add(nextScreen);
+        }
     }
 }
